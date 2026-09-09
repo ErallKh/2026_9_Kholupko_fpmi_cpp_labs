@@ -27,10 +27,12 @@ int main()
     if (copyNumber == fakeNumber)
     {
         cout << "number is palindrom";
+        return 1;
     }
     else
     {
         cout << "number is not palindrom";
+        return 0;
     }
     /*int a1, a2, a3, a4;
     a1 = (int)(n / 1000); //1902 -1-
