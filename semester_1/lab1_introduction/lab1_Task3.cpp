@@ -34,20 +34,5 @@ int main()
         cout << "number is not palindrom";
         return 0;
     }
-    /*int a1, a2, a3, a4;
-    a1 = (int)(n / 1000); //1902 -1-
-    a2 = (int)(n / 100 - a1 * 10); //1902 19-10=-9-
-    a3 = (int)(n / 10 - a1 *100 - a2 * 10); //1902/10=190 - 100 -90=0
-    a4 = (int)(n - a1 * 1000 - a2 *100 - a3 * 10); //1912-1000-900-10=2 
-    if ((a1 == a4) && (a2 == a3))
-    {
-        cout << "Palindrom";
-        return 0;
-    }
-    else
-    {
-        cout << "Don`t palidrom";
-        return 0;
-    }*/            
 }
 
