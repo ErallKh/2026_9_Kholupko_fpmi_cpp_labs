@@ -18,4 +18,5 @@ int main()
         }
         newA += d;
     }
+    return 1;
 }
