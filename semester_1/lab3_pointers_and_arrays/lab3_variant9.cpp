@@ -6,9 +6,9 @@ static mt19937 gen(45218965);
 
 int RandomNumber(int a, int b)
 {
-
     uniform_int_distribution<int> dist(a, b);
     int outN = dist(gen);
+    cout << outN << ", ";
     return outN;
 }
 int WriteNumber()
@@ -29,12 +29,12 @@ int PosNum(int* numbers, int n)
     return outN;
         
 }
-int NewMassiveCreator(int* numbers, int n)
+void NewMassiveCreator(int* numbers, int n)
 {
     int pN = PosNum(numbers, n); 
     int mN = n - pN;
-    int positive[pN];
-    int negative[mN];
+    int* positive = new int[pN];
+    int* negative = new int[mN];
     int iM = 0, iP = 0;
 
     for(int i = 0; i < n; i++)
@@ -64,7 +64,8 @@ int NewMassiveCreator(int* numbers, int n)
         mC++;
         pC++;
     }
-    return 0; 
+    delete[] negative;
+    delete[] positive;
 }
 void ChoseInputer(int* numbers, int n)
 {
@@ -72,7 +73,7 @@ void ChoseInputer(int* numbers, int n)
     cout << "Input: 0-for random numbers; 1-for manual input numbers" << endl;
     cin >> checker;
     
-     switch (checker) // ручной/автоматический ввод
+     switch (checker)
     {
     case 0:
         int bl, br;
@@ -100,7 +101,8 @@ void ChoseInputer(int* numbers, int n)
 }
 void Result(int* numbers, int n)
 {
-    for (int i = 0; i < n; i++) //Вывод
+    cout << endl;
+    for (int i = 0; i < n; i++)
         cout << numbers[i] << ", ";
 }
 int EnterNumber()
@@ -119,9 +121,10 @@ int EnterNumber()
 int main()
 {
     int n = EnterNumber();
-    int numbers[n];
+    int* numbers = new int[n];
     ChoseInputer(numbers, n);
     NewMassiveCreator(numbers, n);
     Result(numbers, n);
+    delete[] numbers;
     return 0;
 }
