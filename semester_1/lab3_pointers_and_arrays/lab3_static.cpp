@@ -2,11 +2,13 @@
 #include <random>
 
 using namespace std;
-mt19937 gen(45218965);
-const int MAX = 1000;
+
+const int MAX = 10000;
 
 int RandomNumber(int a, int b)
 {
+    random_device rd;
+    mt19937 gen(rd());
     uniform_int_distribution<int> dist(a, b);
     int outN = dist(gen);
     cout << outN << ", ";
@@ -19,51 +21,38 @@ int WriteNumber()
     cin >> outN;
     return outN;
 }
-int PosNum(int* numbers, int n)
-{
-    int outN = 0;
-    for (int a = 0; a < n; a++) 
-    {
-        if (numbers[a] > 0)
-            outN++;
-    }
-    return outN;
-        
-}
 void NewMassiveCreator(int* numbers, int n)
 {
-    int pN = PosNum(numbers, n); 
-    int mN = n - pN;
     int positive[MAX];
     int negative[MAX];
-    int iM = 0, iP = 0;
+    int indexM = 0, indexP = 0;
 
     for(int i = 0; i < n; i++)
     {
         if (numbers[i] >= 0)
         {
-            positive[iP] = numbers[i];
-            iP++;
+            positive[indexP] = numbers[i];
+            indexP++;
         }
         else if (numbers[i] < 0)
         {
-            negative[iM] = numbers[i];
-            iM++;
+            negative[indexM] = numbers[i];
+            indexM++;
         }
     }
-    int mC = 0, pC = 0;
-    while(iM > 0)
+    int minusC = 0, plusC = 0;
+    while(indexM > 0)
     {
-        numbers[mC] = negative[mC];
-        iM--;
-        mC++;
+        numbers[minusC] = negative[minusC];
+        indexM--;
+        minusC++;
     }
-    while (iP > 0)
+    while (indexP > 0)
     {
-        numbers[mC] = positive[pC];
-        iP--;
-        mC++;
-        pC++;
+        numbers[minusC] = positive[plusC];
+        indexP--;
+        minusC++;
+        plusC++;
     }
 }
 void ChoseInputer(int* numbers, int n)
@@ -75,6 +64,7 @@ void ChoseInputer(int* numbers, int n)
      switch (checker)
     {
     case 0:
+    {
         int bl, br;
         cout << "Input left border" << endl;
         cin >> bl;
@@ -88,14 +78,18 @@ void ChoseInputer(int* numbers, int n)
         for (int i = 0; i < n; i++)
             numbers[i] = RandomNumber(bl, br);
         break;
-
+    }
     case 1:
+    {
         for (int i = 0; i < n; i++)
             numbers[i] = WriteNumber();
         break;
+    }
     default:
+    {
     cout << "Error";
         exit(1);
+    }
     }
 }
 void Result(int* numbers, int n)
